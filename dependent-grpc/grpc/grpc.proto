@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package dependentgrpc;
+
+service DependentGrpcService{
+        rpc sayHello (SayHelloReq) returns (SayHelloResp) {}
+}
+
+message SayHelloReq {
+        string req = 1;
+}
+
+message SayHelloResp {
+        string resp = 1;
+}
