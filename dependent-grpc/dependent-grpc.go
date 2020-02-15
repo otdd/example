@@ -19,7 +19,7 @@ type server struct {
 
 func (s *server) SayHello(ctx context.Context, in *pb.SayHelloReq) (*pb.SayHelloResp, error) {
         log.Printf("Received: %v", in.GetReq())
-        return &pb.SayHelloResp{Resp: "Hello OTDD"}, nil
+        return &pb.SayHelloResp{Resp: "Hello OTDD!"}, nil
 }
 
 func main() {

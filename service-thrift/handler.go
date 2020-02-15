@@ -54,6 +54,7 @@ func (p *Handler) SayHello(ctx context.Context, req string) (resp string, err er
 		ret = ret + "Failed to connect dependent-thrift:"+err.Error()+"\n"
 	} else {
 		transportFactory := thrift.NewTTransportFactory()
+		transportFactory = thrift.NewTFramedTransportFactory(transportFactory)
 		transport, _ := transportFactory.GetTransport(trans)
 		defer transport.Close()
 		if err := transport.Open(); err != nil {

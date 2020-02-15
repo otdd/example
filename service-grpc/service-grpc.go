@@ -56,6 +56,7 @@ func (s *server) SayHello(ctx context.Context, in *pb.SayHelloReq) (*pb.SayHello
 		ret = ret + "Failed to connect dependent-thrift:"+err.Error()+"\n"
 	} else {
 		transportFactory := thrift.NewTTransportFactory()
+		transportFactory = thrift.NewTFramedTransportFactory(transportFactory)
 		transport, _ := transportFactory.GetTransport(trans)
 		defer transport.Close()
 		if err := transport.Open(); err != nil {

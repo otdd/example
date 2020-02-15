@@ -49,6 +49,7 @@ func SayHello(w http.ResponseWriter, r *http.Request) {
 		io.WriteString(w, "Failed to connect dependent-thrift:"+err.Error()+"\n")
 	} else {
 		transportFactory := thrift.NewTTransportFactory()
+		transportFactory = thrift.NewTFramedTransportFactory(transportFactory)
 		transport, _ := transportFactory.GetTransport(trans)
 		defer transport.Close()
 		if err := transport.Open(); err != nil {

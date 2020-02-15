@@ -16,5 +16,5 @@ func NewHandler() *Handler {
 
 func (p *Handler) SayHello(ctx context.Context, req string) (resp string, err error) {
 	fmt.Print("received req:",req)
-	return "Hello OTDD" , nil
+	return "Hello OTDD!" , nil
 }
