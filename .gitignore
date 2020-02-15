@@ -1,0 +1,7 @@
+service-http/service-http
+service-grpc/service-grpc
+service-thrift/service-thrift
+front-api/front-api
+dependent-http/dependent-http
+dependent-grpc/dependent-grpc
+dependent-thrift/dependent-thrift

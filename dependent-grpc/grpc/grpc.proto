@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package dependentgrpc;
 
-service DependentGrpcService{
+service SayHelloService{
         rpc sayHello (SayHelloReq) returns (SayHelloResp) {}
 }
 

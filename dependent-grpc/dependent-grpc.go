@@ -14,7 +14,7 @@ const (
 
 // server is used to implement helloworld.GreeterServer.
 type server struct {
-        pb.UnimplementedDependentGrpcServiceServer
+        pb.UnimplementedSayHelloServiceServer
 }
 
 func (s *server) SayHello(ctx context.Context, in *pb.SayHelloReq) (*pb.SayHelloResp, error) {
@@ -28,7 +28,7 @@ func main() {
                 log.Fatalf("failed to listen: %v", err)
         }
         s := grpc.NewServer()
-        pb.RegisterDependentGrpcServiceServer(s, &server{})
+        pb.RegisterSayHelloServiceServer(s, &server{})
         if err := s.Serve(lis); err != nil {
                 log.Fatalf("failed to serve: %v", err)
         }

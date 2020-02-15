@@ -110,17 +110,16 @@ func init() {
 func init() { proto.RegisterFile("grpc.proto", fileDescriptor_bedfbfc9b54e5600) }
 
 var fileDescriptor_bedfbfc9b54e5600 = []byte{
-	// 146 bytes of a gzipped FileDescriptorProto
+	// 141 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4a, 0x2f, 0x2a, 0x48,
 	0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x4d, 0x49, 0x2d, 0x48, 0xcd, 0x4b, 0x49, 0xcd,
 	0x2b, 0x01, 0x09, 0x2a, 0xc9, 0x73, 0x71, 0x07, 0x27, 0x56, 0x7a, 0xa4, 0xe6, 0xe4, 0xe4, 0x07,
 	0xa5, 0x16, 0x0a, 0x09, 0x70, 0x31, 0x17, 0xa5, 0x16, 0x4a, 0x30, 0x2a, 0x30, 0x6a, 0x70, 0x06,
 	0x81, 0x98, 0x4a, 0x4a, 0x5c, 0x3c, 0x08, 0x05, 0xc5, 0x05, 0x42, 0x42, 0x5c, 0x2c, 0x45, 0xa9,
-	0xc5, 0x05, 0x50, 0x25, 0x60, 0xb6, 0x51, 0x2c, 0x97, 0x88, 0x0b, 0xcc, 0x54, 0xf7, 0xa2, 0x82,
-	0xe4, 0xe0, 0xd4, 0xa2, 0xb2, 0xcc, 0xe4, 0x54, 0x21, 0x57, 0x2e, 0x8e, 0x62, 0xa8, 0x5e, 0x21,
-	0x29, 0x3d, 0x14, 0x8b, 0xf5, 0x90, 0x6c, 0x95, 0x92, 0xc6, 0x29, 0x57, 0x5c, 0xa0, 0xc4, 0x90,
-	0xc4, 0x06, 0x76, 0xb9, 0x31, 0x20, 0x00, 0x00, 0xff, 0xff, 0xc3, 0x2b, 0x45, 0x8f, 0xc7, 0x00,
-	0x00, 0x00,
+	0xc5, 0x05, 0x50, 0x25, 0x60, 0xb6, 0x51, 0x04, 0x17, 0x3f, 0x4c, 0x4d, 0x70, 0x6a, 0x51, 0x59,
+	0x66, 0x72, 0xaa, 0x90, 0x2b, 0x17, 0x47, 0x31, 0x54, 0x48, 0x48, 0x4a, 0x0f, 0xc5, 0x4e, 0x3d,
+	0x24, 0x0b, 0xa5, 0xa4, 0x71, 0xca, 0x15, 0x17, 0x28, 0x31, 0x24, 0xb1, 0x81, 0x1d, 0x6d, 0x0c,
+	0x08, 0x00, 0x00, 0xff, 0xff, 0x73, 0xbe, 0x4a, 0x3d, 0xc2, 0x00, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -131,72 +130,72 @@ var _ grpc.ClientConnInterface
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion6
 
-// DependentGrpcServiceClient is the client API for DependentGrpcService service.
+// SayHelloServiceClient is the client API for SayHelloService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type DependentGrpcServiceClient interface {
+type SayHelloServiceClient interface {
 	SayHello(ctx context.Context, in *SayHelloReq, opts ...grpc.CallOption) (*SayHelloResp, error)
 }
 
-type dependentGrpcServiceClient struct {
+type sayHelloServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewDependentGrpcServiceClient(cc grpc.ClientConnInterface) DependentGrpcServiceClient {
-	return &dependentGrpcServiceClient{cc}
+func NewSayHelloServiceClient(cc grpc.ClientConnInterface) SayHelloServiceClient {
+	return &sayHelloServiceClient{cc}
 }
 
-func (c *dependentGrpcServiceClient) SayHello(ctx context.Context, in *SayHelloReq, opts ...grpc.CallOption) (*SayHelloResp, error) {
+func (c *sayHelloServiceClient) SayHello(ctx context.Context, in *SayHelloReq, opts ...grpc.CallOption) (*SayHelloResp, error) {
 	out := new(SayHelloResp)
-	err := c.cc.Invoke(ctx, "/dependentgrpc.DependentGrpcService/sayHello", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/dependentgrpc.SayHelloService/sayHello", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// DependentGrpcServiceServer is the server API for DependentGrpcService service.
-type DependentGrpcServiceServer interface {
+// SayHelloServiceServer is the server API for SayHelloService service.
+type SayHelloServiceServer interface {
 	SayHello(context.Context, *SayHelloReq) (*SayHelloResp, error)
 }
 
-// UnimplementedDependentGrpcServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedDependentGrpcServiceServer struct {
+// UnimplementedSayHelloServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedSayHelloServiceServer struct {
 }
 
-func (*UnimplementedDependentGrpcServiceServer) SayHello(ctx context.Context, req *SayHelloReq) (*SayHelloResp, error) {
+func (*UnimplementedSayHelloServiceServer) SayHello(ctx context.Context, req *SayHelloReq) (*SayHelloResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SayHello not implemented")
 }
 
-func RegisterDependentGrpcServiceServer(s *grpc.Server, srv DependentGrpcServiceServer) {
-	s.RegisterService(&_DependentGrpcService_serviceDesc, srv)
+func RegisterSayHelloServiceServer(s *grpc.Server, srv SayHelloServiceServer) {
+	s.RegisterService(&_SayHelloService_serviceDesc, srv)
 }
 
-func _DependentGrpcService_SayHello_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _SayHelloService_SayHello_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SayHelloReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DependentGrpcServiceServer).SayHello(ctx, in)
+		return srv.(SayHelloServiceServer).SayHello(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/dependentgrpc.DependentGrpcService/SayHello",
+		FullMethod: "/dependentgrpc.SayHelloService/SayHello",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DependentGrpcServiceServer).SayHello(ctx, req.(*SayHelloReq))
+		return srv.(SayHelloServiceServer).SayHello(ctx, req.(*SayHelloReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _DependentGrpcService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "dependentgrpc.DependentGrpcService",
-	HandlerType: (*DependentGrpcServiceServer)(nil),
+var _SayHelloService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "dependentgrpc.SayHelloService",
+	HandlerType: (*SayHelloServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "sayHello",
-			Handler:    _DependentGrpcService_SayHello_Handler,
+			Handler:    _SayHelloService_SayHello_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
