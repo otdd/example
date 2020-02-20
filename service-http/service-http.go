@@ -96,34 +96,35 @@ func SayHello(w http.ResponseWriter, r *http.Request) {
 		stmt, err := db.Prepare("insert into hello_otdd_tb(value) VALUES(?)")
 		if err != nil {
 			io.WriteString(w, "failed to prepare insert statement:"+err.Error()+"\n")
-		}
-		res, err := stmt.Exec("Hello OTDD")
-		if err != nil {
-			io.WriteString(w, "failed to execute insert statement:"+err.Error()+"\n")
 		} else {
-			id, _ := res.LastInsertId()
-			io.WriteString(w, fmt.Sprintf("inserted row to table, id:%d \n",id))
-			rows, err := db.Query("select * from hello_otdd_tb order by id desc limit 1")
+			res, err := stmt.Exec("Hello OTDD")
 			if err != nil {
-				io.WriteString(w, "Failed to select from dependent-mysql:"+err.Error()+"\n")
+				io.WriteString(w, "failed to execute insert statement:"+err.Error()+"\n")
 			} else {
-				//https://kylewbanks.com/blog/query-result-to-map-in-golang
-				cols, _ := rows.Columns()
-				for rows.Next() {
-					columns := make([]interface{}, len(cols))
-					columnPointers := make([]interface{}, len(cols))
-					for i, _ := range columns {
-						columnPointers[i] = &columns[i]
-					}
-					if err := rows.Scan(columnPointers...); err != nil {
-						io.WriteString(w, fmt.Sprintf("failed to parse row from dependent-mysql:%v \n", rows))
-					} else {
-						 m := make(map[string]interface{})
-						for i, colName := range cols {
-							val := columnPointers[i].(*interface{})
-							m[colName] = *val
+				id, _ := res.LastInsertId()
+				io.WriteString(w, fmt.Sprintf("inserted row to table, id:%d \n",id))
+				rows, err := db.Query("select * from hello_otdd_tb order by id desc limit 1")
+				if err != nil {
+					io.WriteString(w, "Failed to select from dependent-mysql:"+err.Error()+"\n")
+				} else {
+					//https://kylewbanks.com/blog/query-result-to-map-in-golang
+					cols, _ := rows.Columns()
+					for rows.Next() {
+						columns := make([]interface{}, len(cols))
+						columnPointers := make([]interface{}, len(cols))
+						for i, _ := range columns {
+							columnPointers[i] = &columns[i]
 						}
-						io.WriteString(w, fmt.Sprintf("row with max id from dependent-mysql:%v \n", m))
+						if err := rows.Scan(columnPointers...); err != nil {
+							io.WriteString(w, fmt.Sprintf("failed to parse row from dependent-mysql:%v \n", rows))
+						} else {
+							 m := make(map[string]interface{})
+							for i, colName := range cols {
+								val := columnPointers[i].(*interface{})
+								m[colName] = *val
+							}
+							io.WriteString(w, fmt.Sprintf("row with max id from dependent-mysql:%v \n", m))
+						}
 					}
 				}
 			}
